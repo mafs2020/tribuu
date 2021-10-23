@@ -3,15 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
-
+import { IncioComponent } from './incio/incio.component';
 
 @NgModule({
   declarations: [
-    PagesComponent
+    PagesComponent,
+    IncioComponent
   ],
   imports: [
     CommonModule,
-    PagesRoutingModule
-  ]
+    PagesRoutingModule,
+  ],
 })
 export class PagesModule { }

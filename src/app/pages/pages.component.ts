@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pages.component.scss']
 })
 export class PagesComponent implements OnInit {
-
+  isCollapsed = false;
   constructor() { }
 
   ngOnInit(): void {
