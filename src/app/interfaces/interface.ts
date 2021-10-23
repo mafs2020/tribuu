@@ -10,15 +10,20 @@ export interface User extends Country {
 }
 
 export interface Currency{
-    code: string,
-    name:  string,
-    symbol: string
+    code: string;
+    name:  string;
+    symbol: string;
 }
 
 export interface Country{
-    country: string,
-    countryCode: string,
-    countryCodeName: string,
+    country: string;
+    countryCode: string;
+    countryCodeName: string;
+}
+
+export interface IResponse {
+    users: User[];
+    total: number;
 }
 
 // "_id": "6027129ae8082843808eaa21",

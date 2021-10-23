@@ -1,0 +1,12 @@
+<section *ngIf="(users$ | async) as response; else nodata">
+    <p *ngFor="let item of response.users">
+        {{ item | json}}
+    </p>
+    <!-- <nz-spin [nzSize]="'large'" nzSimple></nz-spin> -->
+    <nz-pagination [nzPageSize]="1" [nzPageIndex]="1" [nzTotal]="response.total"></nz-pagination>
+</section>
+<section>
+    <ng-template #nodata>
+        <nz-spin [nzSize]="'large'" nzSimple></nz-spin>
+    </ng-template>
+</section>
