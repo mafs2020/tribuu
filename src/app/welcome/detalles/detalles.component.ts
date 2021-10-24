@@ -10,13 +10,15 @@ import {
 
 // rxjs
 import { Observable } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { delay, switchMap, tap } from 'rxjs/operators';
 
 // services
 import { UserService } from '../../services/user.service';
 
 import { environment } from 'src/environments/environment';
 import { User } from 'src/app/interfaces/interface';
+import { NzModalService } from 'ng-zorro-antd/modal';
+// import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-detalles',
@@ -27,6 +29,7 @@ export class DetallesComponent implements OnInit {
   user$?: Observable<User>;
   pais?: string;
   formulario?: FormGroup;
+  cargando = false;
   monedas = [
     { code: 'MXN', name: 'Mexican peso', symbol: '$' },
     { code: 'US', name: 'Dollar EUA', symbol: '$' },
@@ -36,6 +39,8 @@ export class DetallesComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private userService: UserService,
+    // private modalService: ModalService,
+    private modalService: NzModalService,
     private fb: FormBuilder
   ) {}
 
@@ -80,11 +85,11 @@ export class DetallesComponent implements OnInit {
     });
   }
 
-  lenguajes(lengua?: string): FormGroup {
-    return this.fb.group({
-      lenguaje: [lengua ?? '', Validators.required],
-    });
-  }
+  // lenguajes(lengua?: string): FormGroup {
+  //   return this.fb.group({
+  //     lenguaje: [lengua ?? '', Validators.required],
+  //   });
+  // }
 
   // addLenguajes(lengua?: string): void {
   //aqui accesas al getter de direcciones
@@ -98,7 +103,16 @@ export class DetallesComponent implements OnInit {
   // }
 
   submitForm() {
-    console.log(this.formulario?.value);
+    this.userService
+      .actualizarUser(this.formulario?.value)
+      .pipe(
+        delay(500),
+        tap((d) => {
+          this.cargando = !this.cargando;
+          this.modalActualizacion();
+        })
+      )
+      .subscribe();
   }
 
   removeSkill(i: number) {
@@ -157,7 +171,13 @@ export class DetallesComponent implements OnInit {
     return this.formulario?.get('currency')!;
   }
 
-  actualizar() {
-    this.userService.actualizarUser(this.formulario?.value).subscribe();
+  modalActualizacion() {
+    this.modalService.info({
+      nzTitle: 'Actualizar',
+      nzContent: `se actualizo correctamene`,
+      nzOkText: 'Ok',
+      nzOkType: 'primary',
+      nzOnOk: () => console.log('object'),
+    });
   }
 }

@@ -215,8 +215,9 @@
     <!-- TODO LOGIN -->
     <!-- [nzLoading]="true" -->
     <button
-      (click)="actualizar()"
       nz-button
+      [nzLoading]="cargando"
+      (click)="cargando = !cargando"
       class="login-form-button login-form-margin"
       [nzType]="'primary'"
     >
