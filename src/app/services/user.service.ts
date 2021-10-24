@@ -27,7 +27,7 @@ export class UserService {
   }
 
   crearUsuarioObser(user: User): Observable<User> {
-    return this.http.post<User>(`${environment.server}/users`, { user });
+    return this.http.post<User>(`${environment.server}/users`, user);
   }
 
   actualizarUser(user: User): Observable<User> {

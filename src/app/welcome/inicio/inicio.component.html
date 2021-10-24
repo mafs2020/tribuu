@@ -2,7 +2,11 @@
   <!-- {{ users | json }} -->
   <!-- <app-card [user]="item" *ngFor="let item of response.users"></app-card> -->
   <!-- <nz-spin [nzSize]="'large'" nzSimple></nz-spin> -->
+  <button class="boton" (click)="crear()" nz-button nzType="primary">
+    Crear
+  </button>
   <nz-table
+    [nzScroll]="{ x: 'auto' }"
     [nzShowPagination]="false"
     [nzFrontPagination]="false"
     [nzTotal]="users.total"

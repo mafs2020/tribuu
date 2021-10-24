@@ -95,4 +95,9 @@ export class InicioComponent implements OnInit, OnDestroy {
     this.userService.crearUsuario = false;
     this.router.navigate(['welcome/', id]);
   }
+
+  crear() {
+    this.userService.crearUsuario = true;
+    this.router.navigate(['welcome/', 'crear']);
+  }
 }

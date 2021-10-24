@@ -21,12 +21,20 @@
   >
     <h4>Usuario</h4>
     <div nz-row [nzGutter]="24">
-      <nz-form-item nz-col [nzSpan]="12">
+      <!-- nzSm="4"
+        nzMd="6"
+        nzLg="8"
+        nzXl="10" -->
+      <nz-form-item nzXs="20" nzMd="12" nzLg="12" nz-col [nzSpan]="12">
         <!-- nzOffset="4" -->
-        <nz-form-label nz-row nzSpan="12" nzFor="name">Nombre</nz-form-label>
+        <nz-form-label nz-row nzSpan="12" nzMd="12" nzLg="12" nzFor="name"
+          >Nombre</nz-form-label
+        >
         <nz-form-control
           nz-row
           [nzSpan]="22"
+          nzMd="12"
+          nzLg="12"
           nzErrorTip="El nombre el obligatorio!"
         >
           <!-- <nz-input-group nzPrefixIcon="user"> -->
@@ -40,13 +48,22 @@
         </nz-form-control>
       </nz-form-item>
 
-      <nz-form-item nz-col [nzSpan]="12">
-        <nz-form-label nz-row nzSpan="12" nzFor="lastname"
+      <nz-form-item nzXs="20" nzMd="12" nzLg="12" nz-col [nzSpan]="12">
+        <nz-form-label
+          nz-row
+          nzXs="20"
+          nzSpan="12"
+          nzMd="12"
+          nzLg="12"
+          nzFor="lastname"
           >Apellido</nz-form-label
         >
         <nz-form-control
           nz-row
           [nzSpan]="22"
+          nzXs="20"
+          nzMd="12"
+          nzLg="12"
           nzErrorTip="el apellido es obligatorio!"
         >
           <!-- <nz-input-group nzPrefixIcon="lock"> -->
@@ -60,11 +77,22 @@
         </nz-form-control>
       </nz-form-item>
 
-      <nz-form-item nz-col [nzSpan]="12">
-        <nz-form-label nz-row nzSpan="12" nzFor="email">E-mail</nz-form-label>
+      <nz-form-item nzXs="20" nzMd="12" nzLg="12" nz-col [nzSpan]="12">
+        <nz-form-label
+          nz-row
+          nzXs="20"
+          nzMd="12"
+          nzLg="12"
+          nzSpan="12"
+          nzFor="email"
+          >E-mail</nz-form-label
+        >
         <nz-form-control
           nz-row
           [nzSpan]="22"
+          nzXs="20"
+          nzMd="12"
+          nzLg="12"
           nzErrorTip="El correo es obligatorio!"
         >
           <!-- <nz-input-group nzPrefixIcon="lock"> -->
@@ -78,24 +106,42 @@
         </nz-form-control>
       </nz-form-item>
 
-      <nz-form-item nz-col [nzSpan]="12">
-        <nz-form-label nz-row nzSpan="12" nzFor="phone">Telefono</nz-form-label>
+      <nz-form-item nzXs="20" nzMd="12" nzLg="12" nz-col [nzSpan]="12">
+        <nz-form-label
+          nzXs="20"
+          nzMd="12"
+          nzLg="12"
+          nz-row
+          nzSpan="12"
+          nzFor="phone"
+          >Telefono</nz-form-label
+        >
+        <nz-form-control
+          nz-row
+          [nzSpan]="22"
+          nzXs="20"
+          nzMd="12"
+          nzLg="12"
+          nzErrorTip="El correo es obligatorio!"
+          ><input
+            type="tel"
+            nz-input
+            formControlName="phone"
+            placeholder="Telefono"
+        /></nz-form-control>
         <!-- <nz-form-control  nzErrorTip="Please input your Password!"> -->
         <!-- <nz-input-group nzPrefixIcon="lock"> -->
-        <input
-          type="tel"
-          nz-input
-          formControlName="phone"
-          placeholder="Telefono"
-        />
         <!-- </nz-input-group> -->
         <!-- </nz-form-control> -->
       </nz-form-item>
-      <nz-form-item nz-col [nzSpan]="12">
+      <nz-form-item nzXs="20" nzMd="12" nzLg="12" nz-col [nzSpan]="12">
         <nz-form-label nz-row nzSpan="12" nzFor="phone">Rol</nz-form-label>
         <nz-form-control
           nz-row
           [nzSpan]="22"
+          nzXs="20"
+          nzMd="12"
+          nzLg="12"
           nzErrorTip="El campo es obligatorio"
         >
           <nz-select nzPlaceHolder="Cambiar el rol" formControlName="role">
@@ -120,14 +166,24 @@
               </nz-input-group>
             </nz-form-control>
           </nz-form-item> -->
-    <div nz-row [nzGutter]="24"></div>
 
     <h4>Ubicacion</h4>
     <div nz-row [nzGutter]="24">
-      <nz-form-item nz-col [nzSpan]="12">
-        <nz-form-label nz-row nzSpan="12" nzFor="phone">Pais</nz-form-label>
+      <nz-form-item nzXs="20" nzMd="12" nzLg="12" nz-col [nzSpan]="12">
+        <nz-form-label
+          nzXs="20"
+          nzMd="12"
+          nzLg="12"
+          nz-row
+          nzSpan="12"
+          nzFor="phone"
+          >Pais</nz-form-label
+        >
         <nz-form-control
           nz-row
+          nzXs="20"
+          nzMd="12"
+          nzLg="12"
           [nzSpan]="22"
           nzErrorTip="el apellido es obligatorio!"
         >
@@ -140,10 +196,21 @@
         </nz-form-control>
       </nz-form-item>
 
-      <nz-form-item nz-col [nzSpan]="12">
-        <nz-form-label nz-row nzSpan="12" nzFor="phone">Lada</nz-form-label>
+      <nz-form-item nzXs="20" nzMd="12" nzLg="12" nz-col [nzSpan]="12">
+        <nz-form-label
+          nzXs="20"
+          nzMd="12"
+          nzLg="12"
+          nz-row
+          nzSpan="12"
+          nzFor="phone"
+          >Lada</nz-form-label
+        >
         <nz-form-control
           nz-row
+          nzXs="20"
+          nzMd="12"
+          nzLg="12"
           [nzSpan]="22"
           nzErrorTip="el apellido es obligatorio!"
         >
@@ -161,22 +228,39 @@
 
     <div formGroupName="currency">
       <div nz-row [nzGutter]="24">
-        <nz-form-item nz-col [nzSpan]="12">
-          <nz-form-label nz-row [nzSpan]="22" nzFor="">Moneda</nz-form-label>
+        <nz-form-item nzXs="20" nzMd="12" nzLg="12" nz-col [nzSpan]="12">
+          <nz-form-label
+            nzXs="20"
+            nzMd="12"
+            nzLg="12"
+            nz-row
+            [nzSpan]="22"
+            nzFor=""
+            >Moneda</nz-form-label
+          >
           <nz-form-control
             nz-row
+            nzXs="20"
+            nzMd="12"
+            nzLg="12"
             nzSpan="22"
             nzErrorTip="El campo es obligatorio"
           >
             <nz-select
               nz-row
               nzSpan="22"
+              nzXs="20"
+              nzMd="12"
+              nzLg="12"
               nzPlaceHolder="escoger Moneda"
               formControlName="code"
             >
               <nz-option
                 nz-row
                 nzSpan="22"
+                nzXs="20"
+                nzMd="12"
+                nzLg="12"
                 *ngFor="let item of monedas"
                 [nzValue]="item"
                 [nzLabel]="item.name"
@@ -188,10 +272,15 @@
     </div>
 
     <nz-form-item nz-col [nzSpan]="12">
-      <nz-form-label nz-row nzSpan="12">Idiomas</nz-form-label>
+      <nz-form-label nzXs="20" nzMd="12" nzLg="12" nz-row nzSpan="12"
+        >Idiomas</nz-form-label
+      >
       <nz-form-control
         nz-row
         [nzSpan]="22"
+        nzXs="20"
+        nzMd="12"
+        nzLg="12"
         nzErrorTip="El campo es obligatorio"
       >
         <nz-select
@@ -211,11 +300,11 @@
     <div nz-row class="login-form-margin">
       <div nz-col [nzSpan]="12"></div>
     </div>
-    <!-- TODO LOGIN -->
     <!-- [nzLoading]="true" -->
+    <!-- [nzLoading]="cargando" -->
     <button
+      [disabled]="formulario?.invalid"
       nz-button
-      [nzLoading]="cargando"
       (click)="cargando = !cargando"
       class="login-form-button login-form-margin"
       [nzType]="'primary'"
