@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {
   AbstractControl,
@@ -9,25 +9,25 @@ import {
 } from '@angular/forms';
 
 // rxjs
-import { Observable } from 'rxjs';
-import { delay, switchMap, tap } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { delay, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 // services
 import { UserService } from '../../services/user.service';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 import { environment } from 'src/environments/environment';
 import { User } from 'src/app/interfaces/interface';
-import { NzModalService } from 'ng-zorro-antd/modal';
-// import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-detalles',
   templateUrl: './detalles.component.html',
   styleUrls: ['./detalles.component.scss'],
 })
-export class DetallesComponent implements OnInit {
-  user$?: Observable<User>;
+export class DetallesComponent implements OnInit, OnDestroy {
+  user?: User;
   pais?: string;
+  finalizarObser = new Subject<never>();
   formulario?: FormGroup;
   cargando = false;
   monedas = [
@@ -38,29 +38,37 @@ export class DetallesComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private userService: UserService,
-    // private modalService: ModalService,
+    public userService: UserService,
     private modalService: NzModalService,
     private fb: FormBuilder
   ) {}
+  ngOnDestroy(): void {
+    this.finalizarObser.next();
+    this.finalizarObser.complete();
+  }
 
   ngOnInit(): void {
-    this.user$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => {
-        if (!params.has('id')) {
-          this.router.navigate(['/welcome']);
-        }
-        const id = params.get('id')!;
-        return this.userService.getUserA(`${environment.server}/users/${id}`);
-      }),
-      tap((data) => {
-        // console.log(data.language);
-        // data.language.forEach((l) => this.addLenguajes(l));
-        this.formulario?.patchValue(data);
-      })
-    );
     this.iniciarFormulario();
+    this.userService.crearUsuario! ? '' : this.getUser();
+
     this.agregar();
+  }
+  getUser() {
+    console.log('object');
+    this.route.paramMap
+      .pipe(
+        takeUntil(this.finalizarObser),
+        switchMap((params: ParamMap) => {
+          const id = params.get('id')!;
+          return this.userService.getUserA(`${environment.server}/users/${id}`);
+        }),
+        tap((data) => {
+          this.userService.crearUsuario!
+            ? ''
+            : this.formulario?.patchValue(data);
+        })
+      )
+      .subscribe();
   }
 
   iniciarFormulario() {
@@ -103,9 +111,27 @@ export class DetallesComponent implements OnInit {
   // }
 
   submitForm() {
+    this.userService.crearUsuario ? this.crear() : this.actualizar();
+  }
+
+  crear() {
+    this.userService
+      .crearUsuarioObser(this.formulario?.value)
+      .pipe(
+        takeUntil(this.finalizarObser),
+        delay(500),
+        tap((d) => {
+          this.cargando = !this.cargando;
+          this.modalActualizacion();
+        })
+      )
+      .subscribe();
+  }
+  actualizar() {
     this.userService
       .actualizarUser(this.formulario?.value)
       .pipe(
+        takeUntil(this.finalizarObser),
         delay(500),
         tap((d) => {
           this.cargando = !this.cargando;

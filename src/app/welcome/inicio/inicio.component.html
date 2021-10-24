@@ -1,52 +1,81 @@
-<section class="" *ngIf="(response$ | async) as users; else nodata">
-    <!-- {{ users | json }} -->
-    <!-- <app-card [user]="item" *ngFor="let item of response.users"></app-card> -->
-    <!-- <nz-spin [nzSize]="'large'" nzSimple></nz-spin> -->
-    <nz-table [nzShowPagination]="false" [nzFrontPagination]="false" [nzTotal]="users.total" [nzPageIndex]="users.pageIndex" [nzPageSize]="5" #basicTable [nzData]="users.users">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>E-mail</th>
-                <th>Pais</th>
-                <th>Telefono</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let data of basicTable.data">
-            <td (click)="detalles(data)">{{data.name}}</td>
-            <td (click)="detalles(data)">{{data.lastname}}</td>
-            <td (click)="detalles(data)">{{data.email}}</td>
-            <td (click)="detalles(data)">{{data.country}}</td>
-            <td (click)="detalles(data)">{{data.phone}}</td>
-            <td>
-              <!-- <a [routerLink]="[data._id]">Actualizar 一 {{data.name}}</a> -->
-              <nz-divider nzType="vertical"></nz-divider>
-              <button nz-button nzDanger nzType="dashed" (click)="showDeleteConfirm(data)">Eliminar</button>
-              <!-- <a routerLink="">Eliminar</a> -->
-            </td>
-          </tr>
-        </tbody>
-      </nz-table>
-    <nz-pagination [nzResponsive]="true" (click)="getDatos($event)" [nzPageSize]="5" [nzPageIndex]="users.pageIndex ?? 1" [nzTotal]="users.total"></nz-pagination>
+<section class="" *ngIf="response$ | async as users; else nodata">
+  <!-- {{ users | json }} -->
+  <!-- <app-card [user]="item" *ngFor="let item of response.users"></app-card> -->
+  <!-- <nz-spin [nzSize]="'large'" nzSimple></nz-spin> -->
+  <nz-table
+    [nzShowPagination]="false"
+    [nzFrontPagination]="false"
+    [nzTotal]="users.total"
+    [nzPageIndex]="users.pageIndex"
+    [nzPageSize]="5"
+    #basicTable
+    [nzData]="users.users"
+  >
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>E-mail</th>
+        <th>Pais</th>
+        <th>Telefono</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.name }}</td>
+        <td>{{ data.lastname }}</td>
+        <td>{{ data.email }}</td>
+        <td>{{ data.country }}</td>
+        <td>{{ data.phone }}</td>
+        <td>
+          <!-- <a [routerLink]="[data._id]">Actualizar 一 {{data.name}}</a> -->
+          <button
+            nz-button
+            nzDanger
+            nzType="dashed"
+            (click)="Actualizar(data._id)"
+          >
+            Actualizar
+          </button>
+          <nz-divider nzType="vertical"></nz-divider>
+          <button
+            nz-button
+            nzDanger
+            nzType="dashed"
+            (click)="showDeleteConfirm(data)"
+          >
+            Eliminar
+          </button>
+          <!-- <a routerLink="">Eliminar</a> -->
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <nz-pagination
+    [nzResponsive]="true"
+    (click)="getDatos($event)"
+    [nzPageSize]="5"
+    [nzPageIndex]="users.pageIndex ?? 1"
+    [nzTotal]="users.total"
+  ></nz-pagination>
 </section>
 <section>
-    <ng-template #nodata>
-        <nz-spin [nzSize]="'large'" nzSimple></nz-spin>
-    </ng-template>
+  <ng-template #nodata>
+    <nz-spin [nzSize]="'large'" nzSimple></nz-spin>
+  </ng-template>
 </section>
 
 <!-- {  -->
-    <!-- "currency": { "code": "MXN", "name": "pesos mexicanos", "symbol": "$" }, -->
-    <!-- "_id": "61743af3fa3ea814d4a22eef", -->
-    <!-- "role": "seller", -->
-    <!-- "language": [ "español. ingles" ], -->
-    <!-- "email": "test@test.com", -->
-    <!-- "name": "test1", -->
-    <!-- "lastname": "testLastName", -->
-    <!-- "country": "mexico", -->
-    <!-- "countryCode": "+52",
+<!-- "currency": { "code": "MXN", "name": "pesos mexicanos", "symbol": "$" }, -->
+<!-- "_id": "61743af3fa3ea814d4a22eef", -->
+<!-- "role": "seller", -->
+<!-- "language": [ "español. ingles" ], -->
+<!-- "email": "test@test.com", -->
+<!-- "name": "test1", -->
+<!-- "lastname": "testLastName", -->
+<!-- "country": "mexico", -->
+<!-- "countryCode": "+52",
     "countryCodeName": "MX", -->
-    <!-- "phone": 7321111 -->
+<!-- "phone": 7321111 -->
 <!-- } -->

@@ -11,9 +11,8 @@
     </nz-form-control>
   </nz-form-item>
 </div> -->
-<section class="ancho" *ngIf="user$ | async as user; else nodata">
-  <!-- {{ formulario!.value | json }} -->
-
+<section class="ancho">
+  <!-- {{ formulario?.value | json }} -->
   <form
     nz-form
     [formGroup]="formulario!"
@@ -221,7 +220,8 @@
       class="login-form-button login-form-margin"
       [nzType]="'primary'"
     >
-      Actualizar
+      {{ userService.crearUsuario! ? "crear" : "actualizar" }}
+      <!-- Actualizar -->
     </button>
   </form>
 </section>

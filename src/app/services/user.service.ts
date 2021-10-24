@@ -11,7 +11,7 @@ import { IResponse, User } from '../interfaces/interface';
 export class UserService {
   private usuariosGet: Subject<IResponse> = new Subject<IResponse>();
   public usuariosGet$ = this.usuariosGet.asObservable();
-
+  crearUsuario?: boolean = true;
   constructor(private http: HttpClient) {}
 
   getUser(skip: number | string = 0): Observable<any> {
@@ -24,6 +24,10 @@ export class UserService {
 
   getUserA(url: string): Observable<User> {
     return this.http.get<User>(url);
+  }
+
+  crearUsuarioObser(user: User): Observable<User> {
+    return this.http.post<User>(`${environment.server}/users`, { user });
   }
 
   actualizarUser(user: User): Observable<User> {
