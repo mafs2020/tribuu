@@ -1,1 +1,118 @@
-<p>detalles works!</p>
+<section class="ancho" *ngIf="user$ | async as user; else nodata">
+    {{ formulario!.value | json}}
+    <form nz-form [formGroup]="formulario!" class="login-form" (ngSubmit)="submitForm()">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="El nombre el obligatorio!">
+            <!-- <nz-input-group nzPrefixIcon="user"> -->
+                <input type="text" nz-input formControlName="name" placeholder="Nombre" />
+            <!-- </nz-input-group> -->
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="el apellido es obligatorio!">
+            <!-- <nz-input-group nzPrefixIcon="lock"> -->
+              <input type="text" nz-input formControlName="lastname" placeholder="Apellido" />
+            <!-- </nz-input-group> -->
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control nzErrorTip="El correo es obligatorio!">
+              <!-- <nz-input-group nzPrefixIcon="lock"> -->
+                <input type="text" nz-input formControlName="email" placeholder="E-mail" />
+              <!-- </nz-input-group> -->
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <!-- <nz-form-control nzErrorTip="Please input your Password!"> -->
+              <!-- <nz-input-group nzPrefixIcon="lock"> -->
+                <input type="tel" nz-input formControlName="phone" placeholder="Telefono" />
+              <!-- </nz-input-group> -->
+            <!-- </nz-form-control> -->
+          </nz-form-item>
+
+
+        <nz-form-item>
+            <nz-form-control nzErrorTip="El campo es obligatorio">
+                <nz-select nzPlaceHolder="Cambiar el rol" formControlName="role">
+                    <nz-option  nzValue="seller" nzLabel="vendedor"></nz-option>
+                    <nz-option nzValue="admin" nzLabel="Aministrador"></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control nzErrorTip="El campo es obligatorio">
+                <nz-select nzPlaceHolder="selecciona el pais" formControlName="country">
+                    <nz-option  nzValue="mexico" nzLabel="Mexico"></nz-option>
+                </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control nzErrorTip="El campo es obligatorio!">
+              <!-- <nz-input-group nzPrefixIcon="lock"> -->
+                  <!-- TODO -->
+                <input [disabled]="moneda" type="text" nz-input formControlName="countryCode" placeholder="Codigo" />
+              <!-- </nz-input-group> -->
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control nzErrorTip="El campo es obligatorio!">
+              <!-- <nz-input-group nzPrefixIcon="lock"> -->
+                  <!-- TODO -->
+                <input [disabled]="moneda" type="text" nz-input formControlName="countryCodeName" placeholder="Codigo Del Pais" />
+              <!-- </nz-input-group> -->
+            </nz-form-control>
+          </nz-form-item>
+
+            <div formGroupName="currency">
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="El campo es obligatorio!">
+                      <!-- <nz-input-group nzPrefixIcon="lock"> -->
+                        <input [disabled]="moneda" type="text" nz-input formControlName="name" placeholder="codigo" />
+                      <!-- </nz-input-group> -->
+                    </nz-form-control>
+                  </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Codigo del pais">
+                      <!-- <nz-input-group nzPrefixIcon="lock"> -->
+                        <input type="text" nz-input formControlName="code" placeholder="codigo" />
+                      <!-- </nz-input-group> -->
+                    </nz-form-control>
+                  </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="El campo es obligatorio!">
+                      <!-- <nz-input-group nzPrefixIcon="lock"> -->
+                        <input [disabled]="moneda" type="text" nz-input formControlName="symbol" placeholder="Simbolo" />
+                      <!-- </nz-input-group> -->
+                    </nz-form-control>
+                  </nz-form-item>
+            </div>
+
+            <div formArrayName="language">
+                <button [disabled]="lenguajesGET.invalid" (click)="addLenguajes()" type="button">+ Agregar lenguaje</button>
+                <div *ngFor="let lengua of lenguajesGET.controls; let i=index">
+                    <div [formGroupName]="i">
+                        <!-- {{i}} -->
+                        Lenguaje:
+                        <input type="text" formControlName="lenguaje">
+                        <button (click)="removeSkill(i)">Eliminar</button>
+                    </div>
+                    <!-- The repeated alias template -->
+                    <!-- <label for="alias-{{ i }}">Alias:</label>
+                    <p> {{ i }} </p>
+                    <input type="text" [formControlName]="i"> -->
+                    <!-- <input type="text" [formControlName]="i"> -->
+                  </div>
+            </div>
+
+
+
+        <div nz-row class="login-form-margin">
+          <div nz-col [nzSpan]="12">
+          </div>
+        </div>
+        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
+      </form>
+</section>
+<ng-template #nodata>
+    <p>no hay dtos</p>
+</ng-template>

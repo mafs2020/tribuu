@@ -23,6 +23,7 @@ export interface Country{
 
 export interface IResponse {
     users: User[];
+    pageIndex: number;
     total: number;
 }
 

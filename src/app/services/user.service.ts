@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { IResponse } from '../interfaces/interface';
+import { IResponse, User } from '../interfaces/interface';
 
 @Injectable({
   providedIn: 'root',
@@ -20,8 +20,12 @@ export class UserService {
     const params = new HttpParams().set('skip', skip!);
     return this.http.get<any>(`${environment.server}/users`, {params})
       .pipe(
-        tap(data => console.log(data)),
+        // tap(data => console.log(data)),
         tap(data => this.usuariosGet.next(data))
       );
+  }
+
+  getUserA(url:string): Observable<User>{
+    return this.http.get<User>(url);
   }
 }

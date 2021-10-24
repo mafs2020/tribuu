@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IResponse, User } from '../interfaces/interface';
-import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-welcome',
