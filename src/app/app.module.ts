@@ -41,7 +41,7 @@ registerLocaleData(en);
     NzMenuModule,
     CommonModule,
     NzNotificationModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

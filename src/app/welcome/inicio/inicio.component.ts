@@ -1,7 +1,8 @@
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
-import { IResponse } from 'src/app/interfaces/interface';
+import { IResponse, User } from '../../interfaces/interface';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -13,7 +14,10 @@ export class InicioComponent implements OnInit, OnDestroy {
   subjectFinish$ = new Subject<never>()
   response$: Observable<IResponse> = this.userService.usuariosGet$
     .pipe(tap(data => console.log(data)));
-  constructor(private userService: UserService) { }
+  constructor(
+      private userService: UserService,
+      private router: Router
+    ) { }
   
   ngOnInit() {
     this.userService.getUser().subscribe();
@@ -31,6 +35,10 @@ export class InicioComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.subjectFinish$),
       ).subscribe();
+  }
+
+  detalles(user:User){
+    this.router.navigate(['welcome/', user._id]);
   }
 
 }

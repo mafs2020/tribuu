@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 import { environment } from 'src/environments/environment';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-detalles',
@@ -17,7 +17,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class DetallesComponent implements OnInit {
   user$?: Observable<User>;
   formulario?: FormGroup;
-  moneda= false;
+  moneda = false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -33,7 +33,8 @@ export class DetallesComponent implements OnInit {
         }
         const id = params.get('id')!;
         return this.userService.getUserA(`${environment.server}/users/${id}`);
-      })
+      }),
+      tap(data => this.formulario?.patchValue(data))
     );
     this.iniciarFormulario();
     this.agregar();
@@ -41,7 +42,6 @@ export class DetallesComponent implements OnInit {
 
   iniciarFormulario() {
     this.formulario = this.fb.group({
-      _id: ['', Validators.required],
       role: ['', Validators.required],
       language: this.fb.array([this.lenguajes()]),
       email: ['', Validators.email],
@@ -49,13 +49,13 @@ export class DetallesComponent implements OnInit {
       lastname: ['', Validators.required],
       phone: '',
       currency: this.fb.group({
-        code: ['', Validators.required],
-        name: ['', Validators.required],
-        symbol: ['', Validators.required],
+        code: [{value: '', disabled: this.moneda}, Validators.required],
+        name: [{value: '', disabled: this.moneda}, Validators.required],
+        symbol: [{value: '', disabled: this.moneda}, Validators.required],
       }),
-      country: ['', Validators.required],
-      countryCode: ['', Validators.required],
-      countryCodeName: ['', Validators.required],
+      country: [{value: '', disabled: this.moneda}, Validators.required],
+      countryCode: [{value: '', disabled: this.moneda}, Validators.required],
+      countryCodeName: [{value: '', disabled: this.moneda}, Validators.required],
     });
   }
 
@@ -86,6 +86,8 @@ export class DetallesComponent implements OnInit {
   }
   
   agregar(){
+    this.moneda = !this.moneda;
+    console.log('this.moneda :>> ', this.moneda);
     this.formulario?.get('country')?.valueChanges
     .pipe(tap(data => this.setterarValores()))
       .subscribe(data => console.log(data));
@@ -121,7 +123,6 @@ export class DetallesComponent implements OnInit {
   }
 
   setterarValores(){
-    this.moneda != this.moneda;
     this.formulario?.get('currency')?.setValue({
       code: "MXN",
       name: "Mexican peso",
@@ -130,6 +131,11 @@ export class DetallesComponent implements OnInit {
     
     this.formulario?.get('countryCodeName')?.setValue("MX");
     this.formulario?.get('countryCode')?.setValue("+52");
+  }
+
+  get control(): AbstractControl{
+    // this.formulario?.get('currency')!.touched
+    return this.formulario?.get('currency')!
   }
 
 }

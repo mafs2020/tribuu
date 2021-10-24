@@ -15,7 +15,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzIconModule } from 'ng-zorro-antd/icon';
+// import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
@@ -38,9 +38,8 @@ import { CardComponent } from './components/card/card.component';
     NzDividerModule,
     NzFormModule,
     NzInputModule,
-    NzIconModule,
     NzButtonModule,
-    NzSelectModule
+    NzSelectModule,
   ],
   declarations: [WelcomeComponent, InicioComponent, DetallesComponent, CardComponent],
   exports: [WelcomeComponent]

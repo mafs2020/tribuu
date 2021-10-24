@@ -49,16 +49,14 @@
           <nz-form-item>
             <nz-form-control nzErrorTip="El campo es obligatorio!">
               <!-- <nz-input-group nzPrefixIcon="lock"> -->
-                  <!-- TODO -->
-                <input [disabled]="moneda" type="text" nz-input formControlName="countryCode" placeholder="Codigo" />
+                <input type="text" nz-input formControlName="countryCode" placeholder="Codigo" />
               <!-- </nz-input-group> -->
             </nz-form-control>
           </nz-form-item>
           <nz-form-item>
             <nz-form-control nzErrorTip="El campo es obligatorio!">
               <!-- <nz-input-group nzPrefixIcon="lock"> -->
-                  <!-- TODO -->
-                <input [disabled]="moneda" type="text" nz-input formControlName="countryCodeName" placeholder="Codigo Del Pais" />
+                <input  type="text" nz-input formControlName="countryCodeName" placeholder="Codigo Del Pais" />
               <!-- </nz-input-group> -->
             </nz-form-control>
           </nz-form-item>
@@ -67,7 +65,7 @@
                 <nz-form-item>
                     <nz-form-control nzErrorTip="El campo es obligatorio!">
                       <!-- <nz-input-group nzPrefixIcon="lock"> -->
-                        <input [disabled]="moneda" type="text" nz-input formControlName="name" placeholder="codigo" />
+                        <input  type="text" nz-input formControlName="name" placeholder="codigo" />
                       <!-- </nz-input-group> -->
                     </nz-form-control>
                   </nz-form-item>
@@ -81,7 +79,7 @@
                 <nz-form-item>
                     <nz-form-control nzErrorTip="El campo es obligatorio!">
                       <!-- <nz-input-group nzPrefixIcon="lock"> -->
-                        <input [disabled]="moneda" type="text" nz-input formControlName="symbol" placeholder="Simbolo" />
+                        <input  type="text" nz-input formControlName="symbol" placeholder="Simbolo" />
                       <!-- </nz-input-group> -->
                     </nz-form-control>
                   </nz-form-item>
@@ -93,8 +91,10 @@
                     <div [formGroupName]="i">
                         <!-- {{i}} -->
                         Lenguaje:
-                        <input type="text" formControlName="lenguaje">
-                        <button (click)="removeSkill(i)">Eliminar</button>
+                        <input nz-input type="text" formControlName="lenguaje">
+                        <button nzDanger [nzSize]="'small'" nz-button class="login-form-button login-form-margin" [nzType]="'default'" (click)="removeSkill(i)">
+                          Eliminar
+                        </button>
                     </div>
                     <!-- The repeated alias template -->
                     <!-- <label for="alias-{{ i }}">Alias:</label>
@@ -110,7 +110,11 @@
           <div nz-col [nzSpan]="12">
           </div>
         </div>
-        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
+        <!-- TODO LOGIN -->
+        <!-- [nzLoading]="true" -->
+        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">
+          Actualizar
+        </button>
       </form>
 </section>
 <ng-template #nodata>
