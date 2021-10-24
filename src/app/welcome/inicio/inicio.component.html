@@ -14,16 +14,17 @@
             </tr>
         </thead>
         <tbody>
-          <tr (click)="detalles(data)" *ngFor="let data of basicTable.data">
-            <td>{{data.name}}</td>
-            <td>{{data.lastname}}</td>
-            <td>{{data.email}}</td>
-            <td>{{data.country}}</td>
-            <td>{{data.phone}}</td>
+          <tr *ngFor="let data of basicTable.data">
+            <td (click)="detalles(data)">{{data.name}}</td>
+            <td (click)="detalles(data)">{{data.lastname}}</td>
+            <td (click)="detalles(data)">{{data.email}}</td>
+            <td (click)="detalles(data)">{{data.country}}</td>
+            <td (click)="detalles(data)">{{data.phone}}</td>
             <td>
               <!-- <a [routerLink]="[data._id]">Actualizar 一 {{data.name}}</a> -->
               <nz-divider nzType="vertical"></nz-divider>
-              <a routerLink="">Eliminar</a>
+              <button nz-button nzDanger nzType="dashed" (click)="showDeleteConfirm(data)">Eliminar</button>
+              <!-- <a routerLink="">Eliminar</a> -->
             </td>
           </tr>
         </tbody>

@@ -39,7 +39,8 @@ export class DetallesComponent implements OnInit {
         return this.userService.getUserA(`${environment.server}/users/${id}`);
       }),
       tap(data => {
-        console.log(data);
+        console.log(data.language);
+        data.language.forEach(l => this.addLenguajes(l));
         this.formulario?.patchValue(data);
       })
     );
@@ -50,7 +51,8 @@ export class DetallesComponent implements OnInit {
   iniciarFormulario() {
     this.formulario = this.fb.group({
       role: ['', Validators.required],
-      language: this.fb.array([this.lenguajes()]),
+      language: this.fb.array([]),
+      // language: this.fb.array([this.lenguajes()]),
       email: ['', Validators.email],
       name: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -66,15 +68,15 @@ export class DetallesComponent implements OnInit {
     });
   }
 
-  lenguajes(): FormGroup {
+  lenguajes(lengua?: string): FormGroup {
     return this.fb.group({
-      lenguaje: ['', Validators.required]
+      lenguaje: [lengua ?? '', Validators.required]
     });
   }
 
-  addLenguajes(): void {
+  addLenguajes(lengua?: string): void {
     //aqui accesas al getter de direcciones
-    this.lenguajesGET.push(this.lenguajes());
+    this.lenguajesGET.push(this.lenguajes(lengua ?? ''));
   }
 
   
@@ -141,6 +143,10 @@ export class DetallesComponent implements OnInit {
   get control(): AbstractControl{
     // this.formulario?.get('currency')!.touched
     return this.formulario?.get('currency')!
+  }
+
+  actualizar() {
+    this.userService.actualizarUser(this.formulario?.value).subscribe();
   }
 
 }

@@ -18,6 +18,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 // import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 
 import { DetallesComponent } from './detalles/detalles.component';
@@ -40,6 +41,7 @@ import { CardComponent } from './components/card/card.component';
     NzInputModule,
     NzButtonModule,
     NzSelectModule,
+    NzModalModule
   ],
   declarations: [WelcomeComponent, InicioComponent, DetallesComponent, CardComponent],
   exports: [WelcomeComponent]

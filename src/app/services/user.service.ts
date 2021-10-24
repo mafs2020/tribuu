@@ -28,4 +28,14 @@ export class UserService {
   getUserA(url:string): Observable<User>{
     return this.http.get<User>(url);
   }
+
+
+  actualizarUser(user: User): Observable<User> {
+    return this.http.put<User>(`${environment.server}/users/${user._id}`, user);
+  }
+
+  eliminarUsuario(id: string): Observable<User>{
+    console.log('id :>> ', id);
+    return this.http.delete<User>(`${environment.server}/users/${id}`, {});
+  }
 }
