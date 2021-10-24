@@ -3,7 +3,7 @@ import { Component, ElementRef, EventEmitter, OnDestroy, OnInit } from '@angular
 import { Router } from '@angular/router';
 
 import { Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { delay, distinctUntilChanged, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { IResponse, User } from '../../interfaces/interface';
 import { UserService } from '../../services/user.service';
@@ -65,7 +65,15 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   eliminar(id:string) {
     this.userService.eliminarUsuario(id)
-      .pipe(switchMap(d => this.userService.getUser()))
+      .pipe(
+          switchMap(d => this.userService.getUser()),
+          delay(500),
+          tap(d => this.modalService.info({
+            nzTitle: 'Borrdo',
+            nzContent: '<p>Borrado Correctamente</p>',
+            nzOnOk: () => console.log('OK')
+          }))
+        )
     .subscribe();
   }
 }

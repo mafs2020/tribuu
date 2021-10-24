@@ -8,33 +8,30 @@ import { IResponse, User } from '../interfaces/interface';
 @Injectable({
   providedIn: 'root',
 })
-
 export class UserService {
-
   private usuariosGet: Subject<IResponse> = new Subject<IResponse>();
   public usuariosGet$ = this.usuariosGet.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getUser(skip: number|string = 0): Observable<any>{
+  getUser(skip: number | string = 0): Observable<any> {
     const params = new HttpParams().set('skip', skip!);
-    return this.http.get<any>(`${environment.server}/users`, {params})
-      .pipe(
-        // tap(data => console.log(data)),
-        tap(data => this.usuariosGet.next(data))
-      );
+    return this.http.get<any>(`${environment.server}/users`, { params }).pipe(
+      // tap(data => console.log(data)),
+      tap((data) => this.usuariosGet.next(data))
+    );
   }
 
-  getUserA(url:string): Observable<User>{
+  getUserA(url: string): Observable<User> {
     return this.http.get<User>(url);
   }
 
-
   actualizarUser(user: User): Observable<User> {
+    console.log(user._id);
     return this.http.put<User>(`${environment.server}/users/${user._id}`, user);
   }
 
-  eliminarUsuario(id: string): Observable<User>{
+  eliminarUsuario(id: string): Observable<User> {
     console.log('id :>> ', id);
     return this.http.delete<User>(`${environment.server}/users/${id}`, {});
   }

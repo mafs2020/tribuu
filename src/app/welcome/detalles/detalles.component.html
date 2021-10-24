@@ -1,122 +1,229 @@
+<!-- <div nz-col [nzSpan]="12" *ngFor="let control of [1,2]">
+  <nz-form-item>
+    <nz-form-label [nzFor]="'field' + control">Field {{ control }}</nz-form-label>
+    <nz-form-control>
+      <input
+        nz-input
+        placeholder="placeholder"
+        [formControlName]="'field' + control"
+        [attr.id]="'field' + control"
+      />
+    </nz-form-control>
+  </nz-form-item>
+</div> -->
 <section class="ancho" *ngIf="user$ | async as user; else nodata">
-    {{ formulario!.value | json}}
-    <form nz-form [formGroup]="formulario!" class="login-form" (ngSubmit)="submitForm()">
-        <nz-form-item>
-          <nz-form-control nzErrorTip="El nombre el obligatorio!">
-            <!-- <nz-input-group nzPrefixIcon="user"> -->
-                <input type="text" nz-input formControlName="name" placeholder="Nombre" />
-            <!-- </nz-input-group> -->
-          </nz-form-control>
-        </nz-form-item>
-        <nz-form-item>
-          <nz-form-control nzErrorTip="el apellido es obligatorio!">
-            <!-- <nz-input-group nzPrefixIcon="lock"> -->
-              <input type="text" nz-input formControlName="lastname" placeholder="Apellido" />
-            <!-- </nz-input-group> -->
-          </nz-form-control>
-        </nz-form-item>
-        <nz-form-item>
+  <!-- {{ formulario!.value | json }} -->
+
+  <form
+    nz-form
+    [formGroup]="formulario!"
+    class="login-form"
+    (ngSubmit)="submitForm()"
+  >
+    <h4>Usuario</h4>
+    <div nz-row [nzGutter]="24">
+      <nz-form-item nz-col [nzSpan]="12">
+        <!-- nzOffset="4" -->
+        <nz-form-label nz-row nzSpan="12" nzFor="name">Nombre</nz-form-label>
+        <nz-form-control
+          nz-row
+          [nzSpan]="22"
+          nzErrorTip="El nombre el obligatorio!"
+        >
+          <!-- <nz-input-group nzPrefixIcon="user"> -->
+          <input
+            type="text"
+            nz-input
+            formControlName="name"
+            placeholder="Nombre"
+          />
+          <!-- </nz-input-group> -->
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item nz-col [nzSpan]="12">
+        <nz-form-label nz-row nzSpan="12" nzFor="lastname"
+          >Apellido</nz-form-label
+        >
+        <nz-form-control
+          nz-row
+          [nzSpan]="22"
+          nzErrorTip="el apellido es obligatorio!"
+        >
+          <!-- <nz-input-group nzPrefixIcon="lock"> -->
+          <input
+            type="text"
+            nz-input
+            formControlName="lastname"
+            placeholder="Apellido"
+          />
+          <!-- </nz-input-group> -->
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item nz-col [nzSpan]="12">
+        <nz-form-label nz-row nzSpan="12" nzFor="email">E-mail</nz-form-label>
+        <nz-form-control
+          nz-row
+          [nzSpan]="22"
+          nzErrorTip="El correo es obligatorio!"
+        >
+          <!-- <nz-input-group nzPrefixIcon="lock"> -->
+          <input
+            type="text"
+            nz-input
+            formControlName="email"
+            placeholder="E-mail"
+          />
+          <!-- </nz-input-group> -->
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item nz-col [nzSpan]="12">
+        <nz-form-label nz-row nzSpan="12" nzFor="phone">Telefono</nz-form-label>
+        <!-- <nz-form-control  nzErrorTip="Please input your Password!"> -->
+        <!-- <nz-input-group nzPrefixIcon="lock"> -->
+        <input
+          type="tel"
+          nz-input
+          formControlName="phone"
+          placeholder="Telefono"
+        />
+        <!-- </nz-input-group> -->
+        <!-- </nz-form-control> -->
+      </nz-form-item>
+      <nz-form-item nz-col [nzSpan]="12">
+        <nz-form-label nz-row nzSpan="12" nzFor="phone">Rol</nz-form-label>
+        <nz-form-control
+          nz-row
+          [nzSpan]="22"
+          nzErrorTip="El campo es obligatorio"
+        >
+          <nz-select nzPlaceHolder="Cambiar el rol" formControlName="role">
+            <nz-option nzValue="seller" nzLabel="vendedor"></nz-option>
+            <nz-option nzValue="admin" nzLabel="Aministrador"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <!-- <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your username!">
+          <nz-input-group nzPrefixIcon="user">
+            <input formControlName="userName" nz-input placeholder="Username" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item> -->
+
+    <!-- <nz-form-item>
             <nz-form-control nzErrorTip="El correo es obligatorio!">
-              <!-- <nz-input-group nzPrefixIcon="lock"> -->
+              <nz-input-group nzPrefixIcon="lock">
                 <input type="text" nz-input formControlName="email" placeholder="E-mail" />
-              <!-- </nz-input-group> -->
+              </nz-input-group>
             </nz-form-control>
-          </nz-form-item>
-          <nz-form-item>
-            <!-- <nz-form-control nzErrorTip="Please input your Password!"> -->
-              <!-- <nz-input-group nzPrefixIcon="lock"> -->
-                <input type="tel" nz-input formControlName="phone" placeholder="Telefono" />
-              <!-- </nz-input-group> -->
-            <!-- </nz-form-control> -->
-          </nz-form-item>
+          </nz-form-item> -->
+    <div nz-row [nzGutter]="24"></div>
 
+    <h4>Ubicacion</h4>
+    <div nz-row [nzGutter]="24">
+      <nz-form-item nz-col [nzSpan]="12">
+        <nz-form-label nz-row nzSpan="12" nzFor="phone">Pais</nz-form-label>
+        <nz-form-control
+          nz-row
+          [nzSpan]="22"
+          nzErrorTip="el apellido es obligatorio!"
+        >
+          <nz-select
+            nzPlaceHolder="selecciona el pais"
+            formControlName="country"
+          >
+            <nz-option nzValue="Mexico" nzLabel="Mexico"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
 
-        <nz-form-item>
-            <nz-form-control nzErrorTip="El campo es obligatorio">
-                <nz-select nzPlaceHolder="Cambiar el rol" formControlName="role">
-                    <nz-option  nzValue="seller" nzLabel="vendedor"></nz-option>
-                    <nz-option nzValue="admin" nzLabel="Aministrador"></nz-option>
-                </nz-select>
-            </nz-form-control>
+      <nz-form-item nz-col [nzSpan]="12">
+        <nz-form-label nz-row nzSpan="12" nzFor="phone">Lada</nz-form-label>
+        <nz-form-control
+          nz-row
+          [nzSpan]="22"
+          nzErrorTip="el apellido es obligatorio!"
+        >
+          <!-- <nz-input-group nzPrefixIcon="lock"> -->
+          <input
+            type="text"
+            nz-input
+            formControlName="countryCode"
+            placeholder="Codigo"
+          />
+          <!-- </nz-input-group> -->
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div formGroupName="currency">
+      <div nz-row [nzGutter]="24">
+        <nz-form-item nz-col [nzSpan]="12">
+          <nz-form-label nz-row [nzSpan]="22" nzFor="">Moneda</nz-form-label>
+          <nz-form-control
+            nz-row
+            nzSpan="22"
+            nzErrorTip="El campo es obligatorio"
+          >
+            <nz-select
+              nz-row
+              nzSpan="22"
+              nzPlaceHolder="escoger Moneda"
+              formControlName="code"
+            >
+              <nz-option
+                nz-row
+                nzSpan="22"
+                *ngFor="let item of monedas"
+                [nzValue]="item"
+                [nzLabel]="item.name"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
         </nz-form-item>
-        <nz-form-item>
-            <nz-form-control nzErrorTip="El campo es obligatorio">
-                <nz-select nzPlaceHolder="selecciona el pais" formControlName="country">
-                    <nz-option nzValue="Mexico" nzLabel="Mexico"></nz-option>
-                </nz-select>
-            </nz-form-control>
-          </nz-form-item>
-          <nz-form-item>
-            <nz-form-control nzErrorTip="El campo es obligatorio!">
-              <!-- <nz-input-group nzPrefixIcon="lock"> -->
-                <input type="text" nz-input formControlName="countryCode" placeholder="Codigo" />
-              <!-- </nz-input-group> -->
-            </nz-form-control>
-          </nz-form-item>
-          <nz-form-item>
-            <nz-form-control nzErrorTip="El campo es obligatorio!">
-              <!-- <nz-input-group nzPrefixIcon="lock"> -->
-                <input  type="text" nz-input formControlName="countryCodeName" placeholder="Codigo Del Pais" />
-              <!-- </nz-input-group> -->
-            </nz-form-control>
-          </nz-form-item>
+      </div>
+    </div>
 
-            <div formGroupName="currency">
-                <nz-form-item>
-                    <nz-form-control nzErrorTip="El campo es obligatorio!">
-                      <!-- <nz-input-group nzPrefixIcon="lock"> -->
-                        <input  type="text" nz-input formControlName="name" placeholder="codigo" />
-                      <!-- </nz-input-group> -->
-                    </nz-form-control>
-                  </nz-form-item>
-                <nz-form-item>
-                    <nz-form-control nzErrorTip="Codigo del pais">
-                      <!-- <nz-input-group nzPrefixIcon="lock"> -->
-                        <input type="text" nz-input formControlName="code" placeholder="codigo" />
-                      <!-- </nz-input-group> -->
-                    </nz-form-control>
-                  </nz-form-item>
-                <nz-form-item>
-                    <nz-form-control nzErrorTip="El campo es obligatorio!">
-                      <!-- <nz-input-group nzPrefixIcon="lock"> -->
-                        <input  type="text" nz-input formControlName="symbol" placeholder="Simbolo" />
-                      <!-- </nz-input-group> -->
-                    </nz-form-control>
-                  </nz-form-item>
-            </div>
+    <nz-form-item nz-col [nzSpan]="12">
+      <nz-form-label nz-row nzSpan="12">Idiomas</nz-form-label>
+      <nz-form-control
+        nz-row
+        [nzSpan]="22"
+        nzErrorTip="El campo es obligatorio"
+      >
+        <nz-select
+          nzMode="multiple"
+          nzPlaceHolder="Seleccionar el Idioma"
+          formControlName="language"
+        >
+          <nz-option
+            *ngFor="let item of lenguas"
+            [nzValue]="item"
+            [nzLabel]="item"
+          ></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
 
-            <div formArrayName="language">
-                <button [disabled]="lenguajesGET.invalid" (click)="addLenguajes()" type="button">+ Agregar lenguaje</button>
-                <div *ngFor="let lengua of lenguajesGET.controls; let i=index">
-                    <div [formGroupName]="i">
-                        <!-- {{i}} -->
-                        Lenguaje:
-                        <input nz-input type="text" formControlName="lenguaje">
-                        <button nzDanger [nzSize]="'small'" nz-button class="login-form-button login-form-margin" [nzType]="'default'" (click)="removeSkill(i)">
-                          Eliminar
-                        </button>
-                    </div>
-                    <!-- The repeated alias template -->
-                    <!-- <label for="alias-{{ i }}">Alias:</label>
-                    <p> {{ i }} </p>
-                    <input type="text" [formControlName]="i"> -->
-                    <!-- <input type="text" [formControlName]="i"> -->
-                  </div>
-            </div>
-
-
-
-        <div nz-row class="login-form-margin">
-          <div nz-col [nzSpan]="12">
-          </div>
-        </div>
-        <!-- TODO LOGIN -->
-        <!-- [nzLoading]="true" -->
-        <button (click)="actualizar()" nz-button class="login-form-button login-form-margin" [nzType]="'primary'">
-          Actualizar
-        </button>
-      </form>
+    <div nz-row class="login-form-margin">
+      <div nz-col [nzSpan]="12"></div>
+    </div>
+    <!-- TODO LOGIN -->
+    <!-- [nzLoading]="true" -->
+    <button
+      (click)="actualizar()"
+      nz-button
+      class="login-form-button login-form-margin"
+      [nzType]="'primary'"
+    >
+      Actualizar
+    </button>
+  </form>
 </section>
 <ng-template #nodata>
-    <p>no hay dtos</p>
+  <p>no hay dtos</p>
 </ng-template>

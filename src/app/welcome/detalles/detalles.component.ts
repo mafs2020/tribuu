@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 // rxjs
 import { Observable } from 'rxjs';
@@ -15,32 +21,36 @@ import { User } from 'src/app/interfaces/interface';
 @Component({
   selector: 'app-detalles',
   templateUrl: './detalles.component.html',
-  styleUrls: ['./detalles.component.scss']
+  styleUrls: ['./detalles.component.scss'],
 })
 export class DetallesComponent implements OnInit {
   user$?: Observable<User>;
   pais?: string;
   formulario?: FormGroup;
-  moneda = false;
+  monedas = [
+    { code: 'MXN', name: 'Mexican peso', symbol: '$' },
+    { code: 'US', name: 'Dollar EUA', symbol: '$' },
+  ];
+  lenguas = ['español', 'ingles', 'chino', 'frances'];
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private userService: UserService,
     private fb: FormBuilder
-    ) { }
+  ) {}
 
   ngOnInit(): void {
     this.user$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
-        if(!params.has('id')){
+        if (!params.has('id')) {
           this.router.navigate(['/welcome']);
         }
         const id = params.get('id')!;
         return this.userService.getUserA(`${environment.server}/users/${id}`);
       }),
-      tap(data => {
-        console.log(data.language);
-        data.language.forEach(l => this.addLenguajes(l));
+      tap((data) => {
+        // console.log(data.language);
+        // data.language.forEach((l) => this.addLenguajes(l));
         this.formulario?.patchValue(data);
       })
     );
@@ -50,8 +60,10 @@ export class DetallesComponent implements OnInit {
 
   iniciarFormulario() {
     this.formulario = this.fb.group({
+      _id: '',
       role: ['', Validators.required],
-      language: this.fb.array([]),
+      language: [[]],
+      // language: this.fb.array([]),
       // language: this.fb.array([this.lenguajes()]),
       email: ['', Validators.email],
       name: ['', Validators.required],
@@ -70,83 +82,82 @@ export class DetallesComponent implements OnInit {
 
   lenguajes(lengua?: string): FormGroup {
     return this.fb.group({
-      lenguaje: [lengua ?? '', Validators.required]
+      lenguaje: [lengua ?? '', Validators.required],
     });
   }
 
-  addLenguajes(lengua?: string): void {
-    //aqui accesas al getter de direcciones
-    this.lenguajesGET.push(this.lenguajes(lengua ?? ''));
-  }
+  // addLenguajes(lengua?: string): void {
+  //aqui accesas al getter de direcciones
+  //   this.lenguajesGET.push(this.lenguajes(lengua ?? ''));
+  // }
 
-  
-  get lenguajesGET(): FormArray {
-    // tienes que acceder al valor del formGroup original
-    // para regresar su valor total me imagino que el largo del arreglo
-    return <FormArray>this.formulario?.get('language');
-  }
+  // get lenguajesGET(): FormArray {
+  // tienes que acceder al valor del formGroup original
+  // para regresar su valor total me imagino que el largo del arreglo
+  //   return <FormArray>this.formulario?.get('language');
+  // }
 
   submitForm() {
     console.log(this.formulario?.value);
   }
 
-  removeSkill(i:number){
-    this.lenguajesGET.removeAt(i);
+  removeSkill(i: number) {
+    console.log('i :>> ', i);
+    // this.lenguajesGET.removeAt(i);
   }
-  
-  agregar(){
-    this.formulario?.get('country')?.valueChanges
-    .pipe(tap(data => this.setterarValores()))
-      .subscribe(data => console.log(data));
-    
+
+  agregar() {
+    this.formulario
+      ?.get('country')
+      ?.valueChanges.pipe(tap((data) => this.setterarValores()))
+      .subscribe((data) => console.log(data));
+
     // if(moneda.includes('pesos')){
-      // this.formulario?.get('currency')?.setValue({
-      //   code: "MXN",
-      //   name: "Mexican peso",
-      //   symbol: "$"
-      // });
+    // this.formulario?.get('currency')?.setValue({
+    //   code: "MXN",
+    //   name: "Mexican peso",
+    //   symbol: "$"
+    // });
     // }
-    
 
     // "_id": "6027129ae8082843808eaa21",
-// "role": "seller",
-// "language": [
-// "Español",
-// "Inglés"
-// ],
-// "email": "micorreo@gmail.com",
-// "name": "Jonh",
-// "lastname": "Doe",
-// "currency": {
-// "code": "MXN",
-// "name": "Mexican peso",
-// "symbol": "$"
-// },
-// "country": "Mexico",
-// "countryCode": "+52",
-// "countryCodeName": "MX",
-// "phone": "5555555555"
-// }
+    // "role": "seller",
+    // "language": [
+    // "Español",
+    // "Inglés"
+    // ],
+    // "email": "micorreo@gmail.com",
+    // "name": "Jonh",
+    // "lastname": "Doe",
+    // "currency": {
+    // "code": "MXN",
+    // "name": "Mexican peso",
+    // "symbol": "$"
+    // },
+    // "country": "Mexico",
+    // "countryCode": "+52",
+    // "countryCodeName": "MX",
+    // "phone": "5555555555"
+    // }
   }
 
-  setterarValores(){
+  setterarValores() {
     this.formulario?.get('currency')?.setValue({
-      code: "MXN",
-      name: "Mexican peso",
-      symbol: "$"
+      code: 'MXN',
+      name: 'Mexican peso',
+      symbol: '$',
     });
-    
-    this.formulario?.get('countryCodeName')?.setValue("MX");
-    this.formulario?.get('countryCode')?.setValue("+52");
+
+    this.formulario?.get('countryCodeName')?.setValue('MX');
+    this.formulario?.get('countryCode')?.setValue('+52');
   }
 
-  get control(): AbstractControl{
+  get control(): AbstractControl {
     // this.formulario?.get('currency')!.touched
-    return this.formulario?.get('currency')!
+    return this.formulario?.get('currency')!;
   }
 
   actualizar() {
     this.userService.actualizarUser(this.formulario?.value).subscribe();
   }
-
 }
