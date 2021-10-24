@@ -16,7 +16,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUser(skip?: number|string): Observable<any>{
+  getUser(skip: number|string = 0): Observable<any>{
     const params = new HttpParams().set('skip', skip!);
     return this.http.get<any>(`${environment.server}/users`, {params})
       .pipe(

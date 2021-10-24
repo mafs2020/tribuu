@@ -2,7 +2,7 @@
     <!-- {{ users | json }} -->
     <!-- <app-card [user]="item" *ngFor="let item of response.users"></app-card> -->
     <!-- <nz-spin [nzSize]="'large'" nzSimple></nz-spin> -->
-    <nz-table [nzShowPagination]="false" [nzFrontPagination]="false" [nzTotal]="users.total" [nzPageIndex]="users.pageIndex ?? 1" [nzPageSize]="5" #basicTable [nzData]="users.users">
+    <nz-table [nzShowPagination]="false" [nzFrontPagination]="false" [nzTotal]="users.total" [nzPageIndex]="users.pageIndex" [nzPageSize]="5" #basicTable [nzData]="users.users">
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -21,14 +21,14 @@
             <td>{{data.country}}</td>
             <td>{{data.phone}}</td>
             <td>
-              <a [routerLink]="[data._id]">Actualizar 一 {{data.name}}</a>
+              <!-- <a [routerLink]="[data._id]">Actualizar 一 {{data.name}}</a> -->
               <nz-divider nzType="vertical"></nz-divider>
               <a routerLink="">Eliminar</a>
             </td>
           </tr>
         </tbody>
       </nz-table>
-    <nz-pagination (click)="imprimir($event)" [nzPageSize]="5" [nzPageIndex]="1" [nzTotal]="users.total"></nz-pagination>
+    <nz-pagination [nzResponsive]="true" (click)="getDatos($event)" [nzPageSize]="5" [nzPageIndex]="users.pageIndex ?? 1" [nzTotal]="users.total"></nz-pagination>
 </section>
 <section>
     <ng-template #nodata>

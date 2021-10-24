@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Country, User } from 'src/app/interfaces/interface';
-
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+// rxjs
 import { Observable } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
+
+// services
 import { UserService } from '../../services/user.service';
+
 import { environment } from 'src/environments/environment';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/interfaces/interface';
 
 @Component({
   selector: 'app-detalles',
@@ -16,6 +19,7 @@ import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '
 })
 export class DetallesComponent implements OnInit {
   user$?: Observable<User>;
+  pais?: string;
   formulario?: FormGroup;
   moneda = false;
   constructor(
@@ -34,7 +38,10 @@ export class DetallesComponent implements OnInit {
         const id = params.get('id')!;
         return this.userService.getUserA(`${environment.server}/users/${id}`);
       }),
-      tap(data => this.formulario?.patchValue(data))
+      tap(data => {
+        console.log(data);
+        this.formulario?.patchValue(data);
+      })
     );
     this.iniciarFormulario();
     this.agregar();
@@ -49,13 +56,13 @@ export class DetallesComponent implements OnInit {
       lastname: ['', Validators.required],
       phone: '',
       currency: this.fb.group({
-        code: [{value: '', disabled: this.moneda}, Validators.required],
-        name: [{value: '', disabled: this.moneda}, Validators.required],
-        symbol: [{value: '', disabled: this.moneda}, Validators.required],
+        code: ['', Validators.required],
+        name: ['', Validators.required],
+        symbol: ['', Validators.required],
       }),
-      country: [{value: '', disabled: this.moneda}, Validators.required],
-      countryCode: [{value: '', disabled: this.moneda}, Validators.required],
-      countryCodeName: [{value: '', disabled: this.moneda}, Validators.required],
+      country: ['', Validators.required],
+      countryCode: ['', Validators.required],
+      countryCodeName: ['', Validators.required],
     });
   }
 
@@ -86,8 +93,6 @@ export class DetallesComponent implements OnInit {
   }
   
   agregar(){
-    this.moneda = !this.moneda;
-    console.log('this.moneda :>> ', this.moneda);
     this.formulario?.get('country')?.valueChanges
     .pipe(tap(data => this.setterarValores()))
       .subscribe(data => console.log(data));

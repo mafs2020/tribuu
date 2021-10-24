@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
@@ -12,6 +12,7 @@ import { UserService } from '../../services/user.service';
 })
 export class InicioComponent implements OnInit, OnDestroy {
   subjectFinish$ = new Subject<never>()
+  indexPage = new EventEmitter<number>();
   response$: Observable<IResponse> = this.userService.usuariosGet$
     .pipe(tap(data => console.log(data)));
   constructor(
@@ -28,8 +29,9 @@ export class InicioComponent implements OnInit, OnDestroy {
     this.subjectFinish$.complete();
   }
 
-  imprimir(event:any){
+  getDatos(event:any){
     const pagina = event.target.innerHTML as string;
+    console.log('pagina :>> ', pagina);
     if(pagina.length > 1) return;
     this.userService.getUser(pagina)
       .pipe(
