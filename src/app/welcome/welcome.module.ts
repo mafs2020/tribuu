@@ -15,15 +15,39 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
-// import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { IconDefinition } from '@ant-design/icons-angular';
 
 import { DetallesComponent } from './detalles/detalles.component';
 import { CardComponent } from './components/card/card.component';
 
+import {
+  AccountBookFill,
+  AlertFill,
+  AlertOutline,
+  RollbackOutline,
+  EditTwoTone,
+  DeleteOutline,
+  DownCircleFill,
+  EnterOutline,
+  UserOutline,
+} from '@ant-design/icons-angular/icons';
+
+const icons: IconDefinition[] = [
+  AccountBookFill,
+  AlertOutline,
+  AlertFill,
+  RollbackOutline,
+  EditTwoTone,
+  DeleteOutline,
+  DownCircleFill,
+  EnterOutline,
+  UserOutline,
+];
 
 @NgModule({
   imports: [
@@ -41,9 +65,15 @@ import { CardComponent } from './components/card/card.component';
     NzInputModule,
     NzButtonModule,
     NzSelectModule,
-    NzModalModule
+    NzModalModule,
+    NzIconModule.forChild(icons),
   ],
-  declarations: [WelcomeComponent, InicioComponent, DetallesComponent, CardComponent],
-  exports: [WelcomeComponent]
+  declarations: [
+    WelcomeComponent,
+    InicioComponent,
+    DetallesComponent,
+    CardComponent,
+  ],
+  exports: [WelcomeComponent],
 })
-export class WelcomeModule { }
+export class WelcomeModule {}

@@ -136,6 +136,7 @@ export class DetallesComponent implements OnInit, OnDestroy {
         tap((d) => {
           this.cargando = !this.cargando;
           this.modalActualizacion();
+          this.router.navigate(['/welcome']);
         })
       )
       .subscribe();

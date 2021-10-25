@@ -4,6 +4,7 @@
   <!-- <nz-spin [nzSize]="'large'" nzSimple></nz-spin> -->
   <button class="boton" (click)="crear()" nz-button nzType="primary">
     Crear
+    <i nz-icon nzType="step-forward" nzTheme="outline"></i>
   </button>
   <nz-table
     [nzScroll]="{ x: 'auto' }"
@@ -33,25 +34,30 @@
         <td>{{ data.country }}</td>
         <td>{{ data.phone }}</td>
         <td>
-          <!-- <a [routerLink]="[data._id]">Actualizar 一 {{data.name}}</a> -->
           <button
+            style="border: 1px solid rgb(9, 113, 199); margin-right: 5px"
+            nzType="default"
             nz-button
-            nzDanger
-            nzType="dashed"
             (click)="Actualizar(data._id)"
           >
-            Actualizar
+            <i
+              nz-icon
+              nzType="edit"
+              style="color: rgb(9, 113, 199)"
+              nzTheme="outline"
+            ></i>
           </button>
-          <nz-divider nzType="vertical"></nz-divider>
-          <button
-            nz-button
-            nzDanger
-            nzType="dashed"
-            (click)="showDeleteConfirm(data)"
-          >
-            Eliminar
+          <button nz-button nzDanger>
+            <i
+              (click)="showDeleteConfirm(data)"
+              nz-icon
+              nzType="delete"
+              nzTheme="fill"
+            ></i>
+            <!-- <i nz-icon [nzType]="'setting'" [nzTheme]="'fill'"></i>
+            <i nz-icon [nzType]="'smile'" [nzTheme]="'outline'"></i>
+            <i nz-icon [nzType]="'sync'" [nzSpin]="true"></i>-->
           </button>
-          <!-- <a routerLink="">Eliminar</a> -->
         </td>
       </tr>
     </tbody>
