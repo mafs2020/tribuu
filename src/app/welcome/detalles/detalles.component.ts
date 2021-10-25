@@ -63,9 +63,11 @@ export class DetallesComponent implements OnInit, OnDestroy {
           return this.userService.getUserA(`${environment.server}/users/${id}`);
         }),
         tap((data) => {
+          console.log('data :>> ', data);
           this.userService.crearUsuario!
             ? ''
             : this.formulario?.patchValue(data);
+          console.log(this.formulario?.value);
         })
       )
       .subscribe();
@@ -78,7 +80,7 @@ export class DetallesComponent implements OnInit, OnDestroy {
       language: [[]],
       // language: this.fb.array([]),
       // language: this.fb.array([this.lenguajes()]),
-      email: ['', Validators.email],
+      email: ['ff@jdjd', Validators.email],
       name: ['', Validators.required],
       lastname: ['', Validators.required],
       phone: '',
@@ -115,12 +117,14 @@ export class DetallesComponent implements OnInit, OnDestroy {
   }
 
   crear() {
+    console.log(this.formulario?.value);
     this.userService
       .crearUsuarioObser(this.formulario?.value)
       .pipe(
         takeUntil(this.finalizarObser),
         delay(500),
         tap((d) => {
+          this.router.navigate(['/welcome']);
           this.cargando = !this.cargando;
           this.modalActualizacion();
         })
@@ -188,7 +192,6 @@ export class DetallesComponent implements OnInit, OnDestroy {
       name: 'Mexican peso',
       symbol: '$',
     });
-
     this.formulario?.get('countryCodeName')?.setValue('MX');
     this.formulario?.get('countryCode')?.setValue('+52');
   }
