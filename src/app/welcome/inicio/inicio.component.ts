@@ -47,12 +47,9 @@ export class InicioComponent implements OnInit, OnDestroy {
     this.subjectFinish$.complete();
   }
 
-  getDatos(event: any) {
-    const pagina = event.target.innerHTML as string;
-    console.log('pagina :>> ', pagina);
-    if (pagina.length > 1) return;
+  accion(event: number) {
     this.userService
-      .getUser(pagina)
+      .getUser(event)
       .pipe(distinctUntilChanged(), takeUntil(this.subjectFinish$))
       .subscribe();
   }
@@ -93,11 +90,11 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   Actualizar(id: string) {
     this.userService.crearUsuario = false;
-    this.router.navigate(['welcome/', id]);
+    this.router.navigate(['welcome/usuario', id]);
   }
 
   crear() {
     this.userService.crearUsuario = true;
-    this.router.navigate(['welcome/', 'crear']);
+    this.router.navigate(['welcome/usuario', 'crear']);
   }
 }

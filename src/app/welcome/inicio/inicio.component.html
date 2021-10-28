@@ -64,7 +64,7 @@
   </nz-table>
   <nz-pagination
     [nzResponsive]="true"
-    (click)="getDatos($event)"
+    (nzPageIndexChange)="accion($event)"
     [nzPageSize]="5"
     [nzPageIndex]="users.pageIndex ?? 1"
     [nzTotal]="users.total"

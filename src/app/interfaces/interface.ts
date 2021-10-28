@@ -1,30 +1,31 @@
 export interface User extends Country {
-    _id: string,
-    role: string,
-    language: string[],
-    email: string,
-    name: string,
-    lastname: string,
-    currency: Currency,
-    phone: number
+  _id: string;
+  role: string;
+  language: string[];
+  email: string;
+  name: string;
+  lastname: string;
+  currency: Currency;
+  phone: number;
 }
 
-export interface Currency{
-    code: string;
-    name:  string;
-    symbol: string;
+export interface Currency {
+  code: string;
+  name: string;
+  symbol: string;
 }
 
-export interface Country{
-    country: string;
-    countryCode: string;
-    countryCodeName: string;
+export interface Country {
+  country: string;
+  countryCode: string;
+  countryCodeName: string;
 }
 
 export interface IResponse {
-    users: User[];
-    pageIndex: number;
-    total: number;
+  users: User[];
+  pageIndex: number;
+  pageSize: number;
+  total: number;
 }
 
 // "_id": "6027129ae8082843808eaa21",

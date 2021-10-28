@@ -36,6 +36,7 @@ import {
   EnterOutline,
   UserOutline,
 } from '@ant-design/icons-angular/icons';
+import { BuscadorComponent } from './buscador/buscador.component';
 
 const icons: IconDefinition[] = [
   AccountBookFill,
@@ -73,6 +74,7 @@ const icons: IconDefinition[] = [
     InicioComponent,
     DetallesComponent,
     CardComponent,
+    BuscadorComponent,
   ],
   exports: [WelcomeComponent],
 })
