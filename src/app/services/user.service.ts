@@ -39,4 +39,22 @@ export class UserService {
     console.log('id :>> ', id);
     return this.http.delete<User>(`${environment.server}/users/${id}`, {});
   }
+
+  getUserBuscador(
+    skip: number | string = 0,
+    termino: string
+  ): Observable<IResponse> {
+    const params = new HttpParams().set('skip', skip!);
+    console.log('llego');
+    return this.http
+      .post<IResponse>(
+        `${environment.server}/users/buscador`,
+        { termino },
+        { params }
+      )
+      .pipe(
+        // tap(data => console.log(data)),
+        tap((data) => this.usuariosGet.next(data))
+      );
+  }
 }

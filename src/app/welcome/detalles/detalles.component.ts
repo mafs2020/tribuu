@@ -126,7 +126,7 @@ export class DetallesComponent implements OnInit, OnDestroy {
         tap((d) => {
           this.router.navigate(['/welcome']);
           this.cargando = !this.cargando;
-          this.modalActualizacion();
+          this.modalcrear();
         })
       )
       .subscribe();
@@ -205,6 +205,16 @@ export class DetallesComponent implements OnInit, OnDestroy {
     this.modalService.info({
       nzTitle: 'Actualizar',
       nzContent: `se actualizo correctamene`,
+      nzOkText: 'Ok',
+      nzOkType: 'primary',
+      nzOnOk: () => console.log('object'),
+    });
+  }
+
+  modalcrear() {
+    this.modalService.info({
+      nzTitle: 'Crear',
+      nzContent: `se creo correctamente`,
       nzOkText: 'Ok',
       nzOkType: 'primary',
       nzOnOk: () => console.log('object'),
