@@ -14,9 +14,19 @@ import { UserService } from 'src/app/services/user.service';
     <nz-card ng-col nzSpan="8" [nzTitle]="'Usuario'" [nzActions]="[actionEdit]">
       <!-- {{ user | json }} -->
       <div class="parrafos">
-        <p><strong>Nombre:</strong> {{ user.name }}</p>
-        <p><strong>pais:</strong> {{ user.country }}</p>
-        <p><strong>rol:</strong> {{ user.role | rol }}</p>
+        <p>
+          Nombre: <strong> {{ user.name }} </strong>
+        </p>
+        <p>
+          Pais: <strong> {{ user.country }} </strong>
+        </p>
+        <p>
+          E-mail: <strong> {{ user.email }} </strong>
+        </p>
+        <!-- <p><strong>rol:</strong> {{ user.role | rol }}</p> -->
+        <p>
+          Telefono: <strong> {{ user.phone }} </strong>
+        </p>
         <button
           *ngIf="user.role === 'seller'"
           nz-button
@@ -28,13 +38,12 @@ import { UserService } from 'src/app/services/user.service';
         <button
           *ngIf="user.role !== 'seller'"
           nz-button
-          nz-danger
-          nzSize="default"
+          nz-button
+          nzDanger
           nzType="primary"
         >
           Administrador
         </button>
-        <p><strong>Telefono:</strong> {{ user.phone }}</p>
       </div>
     </nz-card>
     <ng-template #actionEdit>
