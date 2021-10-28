@@ -32,7 +32,12 @@
   <!-- principal -->
 
   <div *ngIf="response$ | async as response">
-    <div class="mt-3" nz-row [nzGutter]="24">
+    <div
+      *ngIf="response.users.length; else nodata"
+      class="mt-3"
+      nz-row
+      [nzGutter]="24"
+    >
       <!-- *ngIf="response.users.length; else nodata" -->
       <div
         *ngFor="let item of response.users"

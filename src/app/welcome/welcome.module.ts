@@ -37,6 +37,7 @@ import {
   UserOutline,
 } from '@ant-design/icons-angular/icons';
 import { BuscadorComponent } from './buscador/buscador.component';
+import { RolPipe } from './pipe/rol.pipe';
 
 const icons: IconDefinition[] = [
   AccountBookFill,
@@ -75,6 +76,7 @@ const icons: IconDefinition[] = [
     DetallesComponent,
     CardComponent,
     BuscadorComponent,
+    RolPipe,
   ],
   exports: [WelcomeComponent],
 })

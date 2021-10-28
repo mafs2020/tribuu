@@ -1,8 +1,28 @@
 p {
   margin: 0;
+  display: block;
 }
 
 nz-card {
   margin: 0 auto 0.5rem;
-  // width: 300px;
+  text-transform: uppercase;
+}
+
+.parrafos {
+  align-items: center;
+  align-items: center;
+}
+
+button[class*="boton"] {
+  padding: 0.3rem 1rem;
+  border-radius: 9px;
+  color: #fff;
+}
+
+.botonId {
+  background-color: cornflowerblue;
+}
+
+.botonAdmin {
+  background-color: red;
 }
